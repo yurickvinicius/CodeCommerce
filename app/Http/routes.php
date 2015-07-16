@@ -16,3 +16,9 @@ Route::get('/', function () {
 });
 
 Route::get('home','HomeController@index');
+
+Route::get('exemplo','HomeController@exemplo');
+
+Route::get('admin/categories', 'AdminCategoriesController@index');
+
+Route::get('admin/products', 'AdminProductsController@index');
