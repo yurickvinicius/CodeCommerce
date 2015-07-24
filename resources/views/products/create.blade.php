@@ -37,7 +37,8 @@
         </div>
 
         <div>
-            {!! Form::submit('Add Product', ['class'=>'btn btn-primary form-control']) !!}
+            {!! Form::submit('Add Product', ['class'=>'btn btn-primary']) !!}
+            <a href="{{ route('products') }}" class="btn btn-default">Voltar</a>
         </div>
 
         {!! Form::close() !!}
