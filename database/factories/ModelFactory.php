@@ -25,6 +25,8 @@ $factory->define(CodeCommerce\Product::class, function ($faker) {
         'name' => $faker->word(),
         'description' => $faker->sentence(),
         'price' => $faker->randomNumber(2),
-        'category_id' => $faker->numberBetween(1,15)
+        'category_id' => $faker->numberBetween(1,15),
+        'featured' => $faker->numberBetween(0,1),
+        'recomended' => $faker->numberBetween(0,1)
     ];
 });

@@ -10,7 +10,9 @@ class Product extends Model
         'category_id',
         'name',
         'description',
-        'price'
+        'price',
+        'featured',
+        'recomended'
     ];
 
     public function images(){
@@ -36,6 +38,14 @@ class Product extends Model
         //return implode(",", $tags);
 
         return $this->tags->lists('name');
+    }
+
+    public function scopeFeatured($query){
+        return $query->where('featured','=','1');
+    }
+
+    public function scopeRecomended($query){
+        return $query->where('recomended','=','1');
     }
 
 }

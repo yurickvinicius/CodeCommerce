@@ -37,8 +37,17 @@
             {!! Form::text('price', $product->price, ['class' => 'form-control']) !!}
         </div>
 
+        <div class="form-group">
+            {!! Form::label('featured', 'Featured:') !!}
+            {!! Form::checkbox('featured', $product->featured, true) !!}
+
+            {!! Form::label('recomended', 'Recomended:') !!}
+            {!! Form::checkbox('recomended', $product->featured, true) !!}
+        </div>
+
         <div>
-            {!! Form::submit('Save Product', ['class'=>'btn btn-primary form-control']) !!}
+            {!! Form::submit('Save Product', ['class'=>'btn btn-primary']) !!}
+            <a href="{{ route('products') }}" class="btn btn-default">Voltar</a>
         </div>
 
         {!! Form::close() !!}

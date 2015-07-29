@@ -25,9 +25,7 @@
 //redirect()->route('produtos');
 //echo route('produtos');die;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','StoreController@index');
 
 /*
 Route::group(['prefix' => 'admin'], function(){
