@@ -30,3 +30,9 @@ $factory->define(CodeCommerce\Product::class, function ($faker) {
         'recomended' => $faker->numberBetween(0,1)
     ];
 });
+
+$factory->define(CodeCommerce\Tag::class, function ($faker) {
+    return [
+        'name' => $faker->word()
+    ];
+});

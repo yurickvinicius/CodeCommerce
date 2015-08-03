@@ -67,4 +67,16 @@ Route::group(['prefix' => 'admin', 'where' => ['id' => '[0-9]+']], function(){
 
     });
 
+    Route::group(['prefix' => 'tags'], function(){
+        Route::get('', ['as' => 'tags', 'uses' => 'TagsController@index']);
+        Route::get('create', ['as' => 'tags.create', 'uses' => 'TagsController@create']);
+        Route::post('store', ['as' => 'tags.store', 'uses' => 'TagsController@store']);
+        Route::get('destroy/{id}', ['as' => 'tags.destroy', 'uses' => 'TagsController@destroy']);
+        Route::get('edit/{id}', ['as' => 'tags.edit', 'uses' => 'TagsController@edit']);
+        Route::post('update/{id}', ['as' => 'tags.update', 'uses' => 'TagsController@update']);
+    });
+
 });
+
+Route::get('category/{id}', ['as' => 'store.category', 'uses' => 'StoreController@category']);
+Route::get('product/{id}', ['as' => 'store.product', 'uses' => 'StoreController@product']);
