@@ -38,10 +38,10 @@
 
         <div class="form-group">
             {!! Form::label('featured', 'Featured:') !!}
-            {!! Form::checkbox('featured', 1, null) !!}
+            {!! Form::checkbox('featured', 1, false) !!}
 
             {!! Form::label('recomended', 'Recomended:') !!}
-            {!! Form::checkbox('recomended', 1, null) !!}
+            {!! Form::checkbox('recomended', 1, false) !!}
 
         </div>
 

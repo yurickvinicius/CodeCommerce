@@ -2,10 +2,11 @@
 
 namespace CodeCommerce\Http\Controllers;
 
+use CodeCommerce\Category;
 use CodeCommerce\Http\Requests;
 use CodeCommerce\Product;
-use CodeCommerce\Category;
 use CodeCommerce\ProductImage;
+use CodeCommerce\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -15,6 +16,7 @@ class ProductsController extends Controller
     private $productsModel;
 
     public function __construct(Product $product){
+        ///$this->middleware('auth'); /// autentificar login porem é melhor usar middleware de rotas
         $this->productsModel = $product;
     }
 
@@ -33,11 +35,13 @@ class ProductsController extends Controller
 
     public function store(Requests\ProductRequest $request){
 
+        ///dd($request->input('tag_id'));
+        ///$tag = $request->input('tag_id');
+
         $input = $request->all();
         $this->productsModel->fill($input)->save();
 
-        //$product = $this->productsModel->fill($input);
-        //$product->save();
+        ///productsModel->tags()->attach($tag);
 
         return redirect()->route('products');
     }
@@ -105,6 +109,33 @@ class ProductsController extends Controller
 
         return redirect()->route('products.images',['id'=>$product->id]);
 
+    }
+
+    public function Tags($id)
+    {
+        $product = $this->productsModel->find($id);
+        return view('products.tags', compact('product'));
+    }
+
+    public function createTag($id){
+        $product = $this->productsModel->find($id);
+        $tags = Tag::lists('name','id');
+
+        return view('products.create_tag', compact('product', 'tags'));
+    }
+
+    public function storeTag(Request $request, $id){
+        $this->productsModel->find($id)->tags()->attach($request->input('tag_id'));
+        return redirect()->route('products.tags', ['id'=>$id]);
+    }
+
+    public function destroyTag($tag_id, $product_id){
+
+        $product = $this->productsModel->find($product_id);
+
+        $product->tags()->detach($tag_id);
+
+        return redirect()->route('products.tags', ['id'=>$product_id]);
     }
 
 }

@@ -21,13 +21,15 @@ class Cart
     //add
     public function add($id, $name, $price){
 
-        $this->items + [
+        $this->items += [
             $id => [
                 'qtd' => isset($this->items[$id]['qtd']) ? $this->items[$id]['qtd']++ : 1,
                 'price' => $price,
                 'name' => $name
             ]
         ];
+
+        return $this->items;
 
         // id -> qtd, price, name
     }
@@ -47,7 +49,7 @@ class Cart
         $total = 0;
 
         foreach($this->items as $items){
-            $total += $items['atd'] * $items['price'];
+            $total += $items['qtd'] * $items['price'];
         }
 
         return $total;

@@ -34,7 +34,7 @@ Route::group(['prefix' => 'admin'], function(){
 });
 */
 
-Route::group(['prefix' => 'admin', 'where' => ['id' => '[0-9]+']], function(){
+Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'where' => ['id' => '[0-9]+']], function(){
 
     Route::group(['prefix' => 'categories'], function(){
 
@@ -65,6 +65,13 @@ Route::group(['prefix' => 'admin', 'where' => ['id' => '[0-9]+']], function(){
 
         });
 
+        Route::group(['prefix' => 'tags'], function(){
+            Route::get('{id}', ['as' => 'products.tags', 'uses' => 'ProductsController@tags']);
+            Route::get('{id}/create', ['as' => 'products.tags.create', 'uses' => 'ProductsController@createTag']);
+            Route::post('{id}/store', ['as' => 'products.tags.store', 'uses' => 'ProductsController@storeTag']);
+            Route::get('{tag_id}/{product_id}/destroy', ['as' => 'products.tags.destroy', 'uses' => 'ProductsController@destroyTag']);
+        });
+
     });
 
     Route::group(['prefix' => 'tags'], function(){
@@ -80,3 +87,13 @@ Route::group(['prefix' => 'admin', 'where' => ['id' => '[0-9]+']], function(){
 
 Route::get('category/{id}', ['as' => 'store.category', 'uses' => 'StoreController@category']);
 Route::get('product/{id}', ['as' => 'store.product', 'uses' => 'StoreController@product']);
+
+Route::get('cart', ['as' => 'cart', 'uses' => 'CartController@index']);
+Route::get('cart/add/{id}', ['as' => 'cart.add', 'uses' => 'CartController@add']);
+Route::get('cart/destroy/{id}', ['as' => 'cart.destroy', 'uses' => 'CartController@destroy']);
+
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+    'test' => 'TestController'
+]);

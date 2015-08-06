@@ -48,7 +48,7 @@
                     <p>{{ $product->description }}</p>
                                 <span>
                                     <span>R$ {{ number_format($product->price,2,",",".") }}</span>
-                                        <a href="#" class="btn btn-fefault cart">
+                                        <a href="{{ route('cart.add', ['id'=>$product->id]) }}" class="btn btn-fefault cart">
                                             <i class="fa fa-shopping-cart"></i>
                                             Adicionar no Carrinho
                                         </a>
@@ -57,9 +57,11 @@
 
                     <div>
                         <h2>Tags</h2>
-                        @foreach($product->tags as $tag)
+                        @forelse($product->tags as $tag)
                             {{ '#'.$tag->name }}
-                        @endforeach
+                        @empty
+                            <span>Nenhuma tag relacionada</span>
+                        @endforelse
                     </div>
 
                 </div>
