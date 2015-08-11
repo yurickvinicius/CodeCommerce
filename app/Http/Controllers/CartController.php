@@ -61,4 +61,8 @@ class CartController extends Controller
         return $cart;
     }
 
+    public function clear(){
+        $this->items = [];
+    }
+
 }

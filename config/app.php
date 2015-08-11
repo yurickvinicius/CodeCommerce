@@ -144,6 +144,7 @@ return [
         CodeCommerce\Providers\EventServiceProvider::class,
         CodeCommerce\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        LaravelPagseguro\LaravelPagseguroServiceProvider,
 
     ],
 
